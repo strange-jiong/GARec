@@ -75,8 +75,13 @@ class garec(nn.Module):
 														   num_heads=1,
 														   has_residual=self.has_residual)
 		# personalized gating
+<<<<<<< HEAD
 		gate = torch.sigmoid(self.personalized_gate_item(
 			item_embs) + self.personalized_gate_user(user_emb).unsqueeze(1))
+=======
+		gate = torch.sigmoid(self.feature_gate_item(
+			item_embs) + self.feature_gate_user(user_emb).unsqueeze(1))
+>>>>>>> 340d8063f0010af1d05fbb26f79e1cdb30b23782
 		gated_item = item_embs*gate
 
 		merge_gate_score = torch.sigmoid(self.merge_gate1(
