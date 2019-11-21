@@ -58,8 +58,6 @@ class garec(nn.Module):
 		self.W2.weight.data.normal_(0, 1.0 / self.W2.embedding_dim)
 		self.b2.weight.data.zero_()
 
-		self.cache_x = None
-
 	def forward(self, seq_var, user_var, item_var, for_pred=False):
 
 
