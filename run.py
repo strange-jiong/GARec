@@ -338,18 +338,13 @@ if __name__ == '__main__':
     train = Interactions(train_root)
     # transform triplets to sequence representation
     train.to_sequence(config.L, config.T)
-    print("train max item id", max(train.item_ids), "min",
-          min(train.item_ids), "num", train.num_items)
-    print("train item map", len(train.item_map))
+
 
     test_root = 'datasets/{}/test/test.txt'.format(config.dataset)
     test = Interactions(test_root,
                         user_map=train.user_map,
                         item_map=train.item_map)
 
-    print("test max item id", max(test.item_ids), "min",
-          min(test.item_ids), "num", test.num_items)
-    print("train item map", len(test.item_map))
 
     logger.info(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     logger.info(config)
