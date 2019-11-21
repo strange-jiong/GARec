@@ -4,15 +4,12 @@ from time import time
 import torch.optim as optim
 from torch.autograd import Variable
 
-from evaluation import evaluate_ranking
 from interactions import Interactions
 from utils import *
 from collections import defaultdict
 from eval_metrics import *
 
 from garec import garec 
-from caser import caser
-from hgn import hgn
 
 import heapq
 

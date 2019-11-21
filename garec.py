@@ -23,8 +23,8 @@ class garec(nn.Module):
 		self.item_embeddings = nn.Embedding(num_items, dims)
 
 		# personalized gate
-		self.feature_gate_item = nn.Linear(dims, dims)
-		self.feature_gate_user = nn.Linear(dims, dims)
+		self.personalized_gate_item = nn.Linear(dims, dims)
+		self.personalized_gate_user = nn.Linear(dims, dims)
 
 		# merge gate
 		self.merge_gate1 = nn.Linear(dims, dims)
@@ -37,10 +37,7 @@ class garec(nn.Module):
 		self.w_ks = nn.Linear(dims, dims)
 		self.w_vs = nn.Linear(dims, dims)
 
-		self.sequence_to_single = Variable(torch.zeros(
-			dims, 1).type(torch.FloatTensor), requires_grad=True)
-		self.sequence_to_single = torch.nn.init.xavier_uniform_(
-			self.sequence_to_single)
+
 		self.V_res_linear = nn.Linear(dims, dims)
 		self.softmax = nn.Softmax(dim=2)
 
@@ -79,9 +76,9 @@ class garec(nn.Module):
 														   num_units=self.block_shape[i],
 														   num_heads=1,
 														   has_residual=self.has_residual)
-		# feature gating
-		gate = torch.sigmoid(self.feature_gate_item(
-			item_embs) + self.feature_gate_user(user_emb).unsqueeze(1))
+		# personalized gating
+		gate = torch.sigmoid(self.personalized_gate_item(
+			item_embs) + self.personalized_gate_user(user_emb).unsqueeze(1))
 		gated_item = item_embs*gate
 
 		merge_gate_score = torch.sigmoid(self.merge_gate1(
