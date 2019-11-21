@@ -79,7 +79,7 @@ class garec(nn.Module):
 														   num_units=self.block_shape[i],
 														   num_heads=1,
 														   has_residual=self.has_residual)
-		# feature gating
+		# personalized gating
 		gate = torch.sigmoid(self.feature_gate_item(
 			item_embs) + self.feature_gate_user(user_emb).unsqueeze(1))
 		gated_item = item_embs*gate
