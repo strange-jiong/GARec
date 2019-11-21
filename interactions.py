@@ -69,7 +69,6 @@ class Interactions(object):
 
         self.sequences = None
         self.test_sequences = None
-        print("max11 item",max(self.item_ids),min(self.item_ids),"num",self.num_items)
 
 
     def __len__(self):
@@ -83,9 +82,6 @@ class Interactions(object):
 
         row = self.user_ids
         col = self.item_ids
-        print("row",row,"col",col)
-        print("row",len(row),"col",len(col))
-        print("max col",max(col),'num_items',self.num_items)
         data = np.ones(len(self))
 
         return sp.coo_matrix((data, (row, col)),
@@ -138,7 +134,6 @@ class Interactions(object):
             self.item_map[k] = v + 1
         self.item_ids = self.item_ids + 1
         self.num_items += 1
-        print("to sequencse max item",max(self.item_ids),"num",self.num_items)
 
         max_sequence_length = sequence_length + target_length
 
